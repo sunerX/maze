@@ -1,4 +1,6 @@
 // Создание сцены
+
+let scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -34,37 +36,30 @@ controls.update();
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
-
-  if (man && man.cube) {
-    man.cube.position.x = man.x;
-    man.cube.position.y = man.y;
-  }
-
   renderer.render(scene, camera);
-}
-
-function addCube({ x, y, isPlayer = false }) {
-  let material = isPlayer
-    ? new THREE.MeshBasicMaterial({ color: 0 })
-    : new THREE.MeshNormalMaterial({});
-  let geometry = new THREE.BoxGeometry(1, 1, 1);
-  let cube = new THREE.Mesh(geometry, material);
-  cube.position.x = x;
-  cube.position.y = y;
-  scene.add(cube);
-  return cube;
 }
 
 function addMaze() {
   for (let x = 0; x < 25; x++) {
     for (let y = 0; y < 25; y++) {
       if (maze[x][y] === 0) {
-        addCube({ x, y, isPlayer: false });
+        let material = new THREE.MeshNormalMaterial({});
+        let geometry = new THREE.BoxGeometry(1, 1, 1);
+        let cube = new THREE.Mesh(geometry, material);
+        cube.position.x = x;
+        cube.position.y = y;
+        scene.add(cube);
       }
     }
   }
 }
 
-function addMan(man) {
-  man.cube = addCube(man);
+function addPlayer({ x, y }) {
+  let material = new THREE.MeshBasicMaterial({ color: 0 });
+  let geometry = new THREE.BoxGeometry(1, 1, 1);
+  let cube = new THREE.Mesh(geometry, material);
+  cube.position.x = x;
+  cube.position.y = y;
+  scene.add(cube);
+  return cube;
 }
