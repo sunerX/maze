@@ -3,9 +3,9 @@ let maze = generateMaze();
 let man = { x: 0, y: 1, isPlayer: true };
 let isFinished = false;
 
-init3d();
 addMaze();
 addMan(man);
+animate();
 addEventListener("keypress", event => {
   updateMan(event);
   if (isFinished) {

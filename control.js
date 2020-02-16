@@ -1,4 +1,5 @@
 function updateMan({ key }) {
+  debugger;
   let { x, y } = man;
   switch (key) {
     case "s":
@@ -16,7 +17,7 @@ function updateMan({ key }) {
     default:
   }
   if (x >= 0 && y >= 0 && x < 25 && y < 25 && maze[x][y] === 1) {
-    man = { x, y };
+    man = { ...man, x, y };
     if (x === 24 && y === 23) {
       isFinished = true;
     }
