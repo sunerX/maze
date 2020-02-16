@@ -42,7 +42,7 @@ function animate() {
 function addMaze() {
   for (let x = 0; x < 25; x++) {
     for (let y = 0; y < 25; y++) {
-      if (maze[x][y] === 0) {
+      if (maze[x][y] === true) {
         let material = new THREE.MeshNormalMaterial({});
         let geometry = new THREE.BoxGeometry(1, 1, 1);
         let cube = new THREE.Mesh(geometry, material);

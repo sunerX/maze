@@ -21,7 +21,7 @@ addEventListener("keypress", function({ key }) {
     default:
   }
 
-  if (x >= 0 && y >= 0 && x < 25 && y < 25 && maze[x][y] === 1) {
+  if (x >= 0 && y >= 0 && x < 25 && y < 25 && maze[x][y] === false) {
     [player.position.x, player.position.y] = [x, y];
     if (x === 24 && y === 23) {
       alert("Поздравляем, вы - победитель!");
