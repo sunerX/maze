@@ -15,7 +15,7 @@ document.body.appendChild(renderer.domElement);
 
 window.addEventListener(
   "resize",
-  function() {
+  function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
@@ -27,9 +27,9 @@ window.addEventListener(
 // Создание контролов
 
 let controls = new THREE.OrbitControls(camera, renderer.domElement);
-camera.position.x = 0;
-camera.position.y = 0;
-camera.position.z = 40;
+camera.position.x = 0.5;
+camera.position.y = 0.5;
+camera.position.z = 1.5;
 controls.update();
 
 // Запуск анимации
@@ -42,24 +42,18 @@ function animate() {
 function addMaze() {
   for (let x = 0; x < 25; x++) {
     for (let y = 0; y < 25; y++) {
-      if (maze[x][y] === true) {
-        let material = new THREE.MeshNormalMaterial({});
-        let geometry = new THREE.BoxGeometry(1, 1, 1);
-        let cube = new THREE.Mesh(geometry, material);
-        cube.position.x = x;
-        cube.position.y = y;
-        scene.add(cube);
+      for (let z = 0; z < 25; z++) {
+        if (maze[x][y][z] === true) {
+          let material = new THREE.MeshNormalMaterial({});
+          let geometry = new THREE.BoxGeometry(1, 1, 1);
+          let cube = new THREE.Mesh(geometry, material);
+          cube.position.x = x;
+          cube.position.y = y;
+          cube.position.z = z;
+          scene.add(cube);
+        }
       }
     }
   }
 }
 
-function addPlayer({ x, y }) {
-  let material = new THREE.MeshBasicMaterial({ color: 0 });
-  let geometry = new THREE.BoxGeometry(1, 1, 1);
-  let cube = new THREE.Mesh(geometry, material);
-  cube.position.x = x;
-  cube.position.y = y;
-  scene.add(cube);
-  return cube;
-}
