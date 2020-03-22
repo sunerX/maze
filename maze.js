@@ -1,15 +1,18 @@
-function generateMaze() {
-  let maze = new Array(25).fill().map(() => new Array(25).fill().map(() => new Array(25).fill().map(() => true)));
+const SIZE = 6;
+const OUTER_SIZE = 2 * SIZE + 1;
 
-  for (let x = 1; x < 25; x += 2) {
-    for (let y = 1; y < 25; y += 2) {
-      for (let z = 1; z < 25; z += 2) {
+function generateMaze() {
+  let maze = new Array(OUTER_SIZE).fill().map(() => new Array(OUTER_SIZE).fill().map(() => new Array(OUTER_SIZE).fill().map(() => true)));
+
+  for (let x = 1; x < OUTER_SIZE; x += 2) {
+    for (let y = 1; y < OUTER_SIZE; y += 2) {
+      for (let z = 1; z < OUTER_SIZE; z += 2) {
         maze[x][y][z] = false;
       }
     }
   }
 
-  let isVisited = new Array(12).fill().map(() => new Array(12).fill().map(() => new Array(12).fill(false)));
+  let isVisited = new Array(SIZE).fill().map(() => new Array(SIZE).fill().map(() => new Array(SIZE).fill(false)));
   isVisited[0][0][0] = true;
   let stack = [[0, 0, 0]];
   while (stack.length > 0) {
@@ -22,7 +25,7 @@ function generateMaze() {
       [x, y, z + 1],
       [x, y, z - 1]
     ].filter(
-      ([x, y, z]) => x >= 0 && y >= 0 && z >= 0 && x < 12 && y < 12 && z < 12 && !isVisited[x][y][z]
+      ([x, y, z]) => x >= 0 && y >= 0 && z >= 0 && x < SIZE && y < SIZE && z < SIZE && !isVisited[x][y][z]
     );
     if (variants.length > 0) {
       let n = Math.floor(Math.random() * variants.length);
@@ -35,7 +38,7 @@ function generateMaze() {
     }
   }
   maze[0][0][1] = false;
-  maze[24][24][23] = false;
+  maze[OUTER_SIZE - 1][OUTER_SIZE - 1][OUTER_SIZE - 2] = false;
 
   return maze;
 }

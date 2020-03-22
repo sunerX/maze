@@ -27,12 +27,12 @@ addEventListener("keypress", function ({ key }) {
     default:
   }
 
-  if (x >= 0 && y >= 0 && z >= 0 && x < 25 && y < 25 && z < 25 && maze[x][y][z] === false) {
+  if (x >= 0 && y >= 0 && z >= 0 && x < OUTER_SIZE && y < OUTER_SIZE && z < OUTER_SIZE && maze[x][y][z] === false) {
     player = { x, y, z };
     camera.position.x = x + 0.5;
     camera.position.y = y + 0.5;
     camera.position.z = z + 0.5;
-    if (x === 24 && y === 24 && z === 23) {
+    if (x === OUTER_SIZE - 1 && y === OUTER_SIZE - 1 && z === OUTER_SIZE - 2) {
       alert("Поздравляем, вы - победитель!");
       location.reload();
     }

@@ -40,9 +40,9 @@ function animate() {
 }
 
 function addMaze() {
-  for (let x = 0; x < 25; x++) {
-    for (let y = 0; y < 25; y++) {
-      for (let z = 0; z < 25; z++) {
+  for (let x = 0; x < OUTER_SIZE; x++) {
+    for (let y = 0; y < OUTER_SIZE; y++) {
+      for (let z = 0; z < OUTER_SIZE; z++) {
         if (maze[x][y][z] === true) {
           let material = new THREE.MeshNormalMaterial({});
           let geometry = new THREE.BoxGeometry(1, 1, 1);
